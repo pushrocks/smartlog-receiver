@@ -1,6 +1,6 @@
 {
   "name": "@pushrocks/smartlog-receiver",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "a receiver for smartlog-destination-receiver",
   "main": "dist/index.js",
