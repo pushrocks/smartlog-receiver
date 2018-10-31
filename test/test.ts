@@ -5,6 +5,6 @@ let testReceiver: smartlogReceiver.SmartlogReceiver;
 
 tap.test('first test', async () => {
   testReceiver = new smartlogReceiver.SmartlogReceiver();
-})
+});
 
 tap.start();

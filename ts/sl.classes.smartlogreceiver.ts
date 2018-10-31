@@ -9,7 +9,5 @@ export class SmartlogReceiver {
   /**
    * handles a authenticated log
    */
-  private handleAuthenticatedLog (authenticatedLogArg) {
-    
-  }
+  private handleAuthenticatedLog(authenticatedLogArg) {}
 }
