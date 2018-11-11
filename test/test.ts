@@ -23,7 +23,8 @@ tap.test('should receive a message', async () => {
   testReceiver.handleAuthenticatedLog({
     auth: smarthash.sha256FromStringSync('hi'),
     logPackage: {
-      logContext: {
+      timestamp: Date.now(),
+      context: {
         company: 'Lossless GmbH',
         companyunit: 'Lossless Cloud',
         containerName: null,
@@ -31,7 +32,8 @@ tap.test('should receive a message', async () => {
         runtime: 'node',
         zone: 'gitzone'
       },
-      logLevel: 'info',
+      level: 'info',
+      type: 'log',
       message: 'hi there'
     }
   });
