@@ -2,7 +2,7 @@ import * as plugins from './sl.receiver.plugins';
 
 import { ILogPackage, ILogPackageAuthenticated, ILogDestination } from '@pushrocks/smartlog-interfaces';
 
-export type TValidatorFunction = () => boolean;
+export type TValidatorFunction = (logPackage: ILogPackage) => boolean;
 
 export interface ISmartlogReceiverOptions {
   smartlogInstance: plugins.smartlog.Smartlog;
