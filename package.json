@@ -21,6 +21,8 @@
     "tslint-config-prettier": "^1.15.0"
   },
   "dependencies": {
+    "@pushrocks/smarthash": "^2.0.0",
+    "@pushrocks/smartlog": "^2.0.8",
     "@pushrocks/smartlog-interfaces": "^1.0.15"
   }
 }
