@@ -14,9 +14,9 @@ export interface ISmartlogReceiverOptions {
  * a class that receives smartlog packages
  */
 export class SmartlogReceiver {
-  passphrase: string;
-  validatorFunction: TValidatorFunction;
-  smartlogInstance: plugins.smartlog.Smartlog;
+  public passphrase: string;
+  public validatorFunction: TValidatorFunction;
+  public smartlogInstance: plugins.smartlog.Smartlog;
 
   constructor(smartlogReceiverOptions: ISmartlogReceiverOptions) {
     this.passphrase = smartlogReceiverOptions.passphrase;
@@ -27,7 +27,7 @@ export class SmartlogReceiver {
   /**
    * handles a authenticated log
    */
-  async handleAuthenticatedLog(authenticatedLogPackageArg: ILogPackageAuthenticated) {
+  public async handleAuthenticatedLog(authenticatedLogPackageArg: ILogPackageAuthenticated) {
     const authString = authenticatedLogPackageArg.auth;
     const logPackage = authenticatedLogPackageArg.logPackage;
 
@@ -40,6 +40,18 @@ export class SmartlogReceiver {
       return { status: 'error' };
       // console.log(plugins.smarthash.sha256FromStringSync(this.passphrase));
     }
+  }
+
+  /**
+   * handles an array of authenticated logs
+   * @param authenticatedLogsPackageArrayArg
+   */
+  public async handleManyAuthenticatedLogs(authenticatedLogsPackageArrayArg: ILogPackageAuthenticated[]) {
+    const promiseArray: Array<Promise<any>> = [];
+    for (const logPackage of authenticatedLogsPackageArrayArg) {
+      promiseArray.push(this.handleAuthenticatedLog(logPackage));
+    }
+    await Promise.all(promiseArray);
   }
 
   
