@@ -34,9 +34,13 @@ tap.test('should receive a message', async () => {
       },
       level: 'info',
       type: 'log',
-      message: 'hi there'
+      correlation: {
+        id: '123',
+        type: 'none'
+      },
+      message: 'hi there',
     }
   });
-})
+});
 
 tap.start();

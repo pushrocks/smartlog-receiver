@@ -1,6 +1,20 @@
 .nogit/
-node_modules/
+
+# artifacts
 coverage/
 public/
 pages/
+
+# installs
+node_modules/
+
+# caches
 .yarn/
+.cache/
+.rpt2_cache
+
+# builds
+dist/
+dist_*/
+
+# custom

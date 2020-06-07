@@ -1,6 +1,10 @@
 import * as plugins from './sl.receiver.plugins';
 
-import { ILogPackage, ILogPackageAuthenticated, ILogDestination } from '@pushrocks/smartlog-interfaces';
+import {
+  ILogPackage,
+  ILogPackageAuthenticated,
+  ILogDestination
+} from '@pushrocks/smartlog-interfaces';
 
 export type TValidatorFunction = (logPackage: ILogPackage) => boolean;
 
@@ -31,7 +35,7 @@ export class SmartlogReceiver {
     const authString = authenticatedLogPackageArg.auth;
     const logPackage = authenticatedLogPackageArg.logPackage;
 
-    if(authString === plugins.smarthash.sha256FromStringSync(this.passphrase)) {
+    if (authString === plugins.smarthash.sha256FromStringSync(this.passphrase)) {
       // this.smartlogInstance.log('ok', 'Message accepted');
       this.smartlogInstance.handleLogPackage(logPackage);
       return { status: 'ok' };
@@ -46,13 +50,13 @@ export class SmartlogReceiver {
    * handles an array of authenticated logs
    * @param authenticatedLogsPackageArrayArg
    */
-  public async handleManyAuthenticatedLogs(authenticatedLogsPackageArrayArg: ILogPackageAuthenticated[]) {
+  public async handleManyAuthenticatedLogs(
+    authenticatedLogsPackageArrayArg: ILogPackageAuthenticated[]
+  ) {
     const promiseArray: Array<Promise<any>> = [];
     for (const logPackage of authenticatedLogsPackageArrayArg) {
       promiseArray.push(this.handleAuthenticatedLog(logPackage));
     }
     await Promise.all(promiseArray);
   }
-
-  
 }
