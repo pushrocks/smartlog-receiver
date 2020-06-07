@@ -37,7 +37,7 @@ export class SmartlogReceiver {
 
     if (authString === plugins.smarthash.sha256FromStringSync(this.passphrase)) {
       // this.smartlogInstance.log('ok', 'Message accepted');
-      this.smartlogInstance.handleLogPackage(logPackage);
+      this.smartlogInstance.handleLog(logPackage);
       return { status: 'ok' };
     } else {
       this.smartlogInstance.log('error', 'Message rejected because of bad passphrase');

@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@pushrocks/smarthash": "^2.1.6",
-    "@pushrocks/smartlog": "^2.0.21",
+    "@pushrocks/smartlog": "^2.0.24",
     "@pushrocks/smartlog-interfaces": "^2.0.15"
   },
   "files": [
