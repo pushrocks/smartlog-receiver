@@ -3,7 +3,7 @@ import * as plugins from './sl.receiver.plugins';
 import {
   ILogPackage,
   ILogPackageAuthenticated,
-  ILogDestination
+  ILogDestination,
 } from '@pushrocks/smartlog-interfaces';
 
 export type TValidatorFunction = (logPackage: ILogPackage) => boolean;
@@ -36,7 +36,11 @@ export class SmartlogReceiver {
     const logPackage = authenticatedLogPackageArg.logPackage;
 
     if (authString === plugins.smarthash.sha256FromStringSync(this.passphrase)) {
-      // this.smartlogInstance.log('ok', 'Message accepted');
+      // Message authenticated lets clean up.
+      logPackage.correlation ? null : (logPackage.correlation = { id: '123', type: 'none' });
+      logPackage.correlation.id ? null : (logPackage.correlation.id = '123');
+      logPackage.correlation.type ? null : (logPackage.correlation.type = 'none');
+
       this.smartlogInstance.handleLog(logPackage);
       return { status: 'ok' };
     } else {
