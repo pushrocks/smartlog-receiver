@@ -38,7 +38,7 @@ tap.test('should receive a message', async () => {
         id: '123',
         type: 'none'
       },
-      message: 'hi there',
+      message: 'hi there'
     }
   });
 });
