@@ -12,7 +12,7 @@ tap.test('should create a valid SmartlogReceiver', async () => {
   testReceiver = new smartlogReceiver.SmartlogReceiver({
     passphrase: 'hi',
     smartlogInstance: testSmartlog,
-    validatorFunction: () => {
+    validatorFunction: async () => {
       return true;
     }
   });

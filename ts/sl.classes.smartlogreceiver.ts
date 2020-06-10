@@ -6,7 +6,7 @@ import {
   ILogDestination,
 } from '@pushrocks/smartlog-interfaces';
 
-export type TValidatorFunction = (logPackage: ILogPackage) => boolean;
+export type TValidatorFunction = (logPackage: ILogPackage) => Promise<boolean>;
 
 export interface ISmartlogReceiverOptions {
   smartlogInstance: plugins.smartlog.Smartlog;
@@ -24,7 +24,7 @@ export class SmartlogReceiver {
 
   constructor(smartlogReceiverOptions: ISmartlogReceiverOptions) {
     this.passphrase = smartlogReceiverOptions.passphrase;
-    this.validatorFunction = smartlogReceiverOptions.validatorFunction;
+    this.validatorFunction = smartlogReceiverOptions.validatorFunction || (async (logpackageArg) => {return true});
     this.smartlogInstance = smartlogReceiverOptions.smartlogInstance;
   }
 
@@ -35,7 +35,10 @@ export class SmartlogReceiver {
     const authString = authenticatedLogPackageArg.auth;
     const logPackage = authenticatedLogPackageArg.logPackage;
 
-    if (authString === plugins.smarthash.sha256FromStringSync(this.passphrase)) {
+    if (
+      authString === plugins.smarthash.sha256FromStringSync(this.passphrase)
+      && await this.validatorFunction(logPackage)
+    ) {
       // Message authenticated lets clean up.
       logPackage.correlation ? null : (logPackage.correlation = { id: '123', type: 'none' });
       logPackage.correlation.id ? null : (logPackage.correlation.id = '123');
